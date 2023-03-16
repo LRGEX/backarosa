@@ -1,4 +1,4 @@
-FROM arm64v8/ubuntu 
+FROM ubuntu 
 # this is the base image for the container 
 
 ARG DUPLICATI_RELEASE 
