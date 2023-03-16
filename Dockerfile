@@ -43,7 +43,8 @@ RUN apt-get update -y && apt-get upgrade -y && apt-get install -y \
     /tmp/* \
     /var/lib/apt/lists/* \
     /var/tmp/* && \
-    mkdir /source
+    mkdir /source && \
+    find /opt/backarosa -type f -exec chmod +x {} \;
   
 
 USER root
