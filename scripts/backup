@@ -1,0 +1,31 @@
+#!/bin/bash
+source /opt/backarosa/container_start # this is needed to run container_start function
+source /opt/backarosa/container_stop # this is needed to run container_stop function
+#==========================================================
+#======================= MEGA SECTION =====================
+#==========================================================
+if [ -n "${MEGA_EMAIL}" ] && [ -n "${MEGA_PASSWORD}" ]; then
+  if [ "${SAFE_BACKUP}" == "true" ]; then
+    container_stop
+    duplicati-cli repair "mega://${MEGA_DIR}" --auth-username="${MEGA_EMAIL}" --auth-password="${MEGA_PASSWORD}" --no-encryption="true" --number-of-retries=1
+    duplicati-cli backup "mega://${MEGA_DIR}" "${BACKAROSA_SOURCE}" --auth-username="${MEGA_EMAIL}" --auth-password="${MEGA_PASSWORD}" --no-encryption="true" --keep-versions="${KEEP_VERSIONS}"
+    container_start
+  else
+    duplicati-cli repair "mega://${MEGA_DIR}" --auth-username="${MEGA_EMAIL}" --auth-password="${MEGA_PASSWORD}" --no-encryption="true" --keep-versions=3 --number-of-retries=1
+    duplicati-cli backup "mega://${MEGA_DIR}" "${BACKAROSA_SOURCE}" --auth-username="${MEGA_EMAIL}" --auth-password="${MEGA_PASSWORD}" --no-encryption="true" --keep-versions=3
+  fi
+  cron_exist=$(cat /etc/crontab 2>/dev/null | grep "root" | awk -F" root" '{print $1}')
+  if [ -n "${CRON}" ] && [ "$cron_exist" != "${CRON}" ]; then
+    rm /etc/crontab
+    # > /proc/1/fd/1 2> /proc/1/fd/2 redirect output to docker logs when working inside container
+    echo -e "${CRON} root /opt/backarosa/backup > /proc/1/fd/1 2> /proc/1/fd/2 \n" >> /etc/crontab
+    cron -f -L 2 # -f run cron in foreground and 2 after cron job , meaning the container will keep running even if cron job fails
+  fi 
+fi
+#==========================================================
+#================== END OF MEGA SECTION ===================
+#==========================================================
+
+#==========================================================
+# ====================== FTP SECTION ======================
+#==========================================================

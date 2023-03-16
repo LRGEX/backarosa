@@ -1,0 +1,7 @@
+#!/bin/bash
+container_start(){
+    container_name=$(cat /etc/hostname)
+    container_volumes=$(docker inspect -f '{{ .Mounts }}' $container_name  | grep -oP '(?<={volume )[^ ]*')
+    container_close=$(docker ps -a --filter volume=$container_volumes | sed "/backarosa/d" | awk '{print $1}' | sed 's/CONTAINER//g')
+    docker start $container_close > /dev/null 2>&1
+}
