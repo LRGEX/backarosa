@@ -5,14 +5,16 @@ source /opt/backarosa/container_stop # this is needed to run container_stop func
 #======================= MEGA SECTION =====================
 #==========================================================
 if [ -n "${MEGA_EMAIL}" ] && [ -n "${MEGA_PASSWORD}" ]; then
+  duplicati-cli find "mega://${MEGA_DIR}" --auth-username="${MEGA_EMAIL}" --auth-password="${MEGA_PASSWORD}" --no-encryption="true" --number-of-retries=1 > /dev/null 2>&1 # check if mega folder exists
+  if [ $? -eq 0 ]; then
+    duplicati-cli repair "mega://${MEGA_DIR}" --auth-username="${MEGA_EMAIL}" --auth-password="${MEGA_PASSWORD}" --no-encryption="true" --number-of-retries=1
+  fi
   if [ "${SAFE_BACKUP}" == "true" ]; then
     container_stop
-    duplicati-cli repair "mega://${MEGA_DIR}" --auth-username="${MEGA_EMAIL}" --auth-password="${MEGA_PASSWORD}" --no-encryption="true" --number-of-retries=1
     duplicati-cli backup "mega://${MEGA_DIR}" "${BACKAROSA_SOURCE}" --auth-username="${MEGA_EMAIL}" --auth-password="${MEGA_PASSWORD}" --no-encryption="true" --keep-versions="${KEEP_VERSIONS}"
     container_start
   else
-    duplicati-cli repair "mega://${MEGA_DIR}" --auth-username="${MEGA_EMAIL}" --auth-password="${MEGA_PASSWORD}" --no-encryption="true" --keep-versions=3 --number-of-retries=1
-    duplicati-cli backup "mega://${MEGA_DIR}" "${BACKAROSA_SOURCE}" --auth-username="${MEGA_EMAIL}" --auth-password="${MEGA_PASSWORD}" --no-encryption="true" --keep-versions=3
+    duplicati-cli backup "mega://${MEGA_DIR}" "${BACKAROSA_SOURCE}" --auth-username="${MEGA_EMAIL}" --auth-password="${MEGA_PASSWORD}" --no-encryption="true" --keep-versions="${KEEP_VERSIONS}"
   fi
   cron_exist=$(cat /etc/crontab 2>/dev/null | grep "root" | awk -F" root" '{print $1}')
   if [ -n "${CRON}" ] && [ "$cron_exist" != "${CRON}" ]; then
