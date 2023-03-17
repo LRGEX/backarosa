@@ -2,7 +2,7 @@ FROM ubuntu
 # this is the base image for the container 
 
 ARG DUPLICATI_RELEASE 
-#
+# ARG is same as ENV but only for build time and not for runtime, so u cant use it as variable in the container
 # ARG is same as ENV but only for build time and not for runtime, so u cant use it as variable in the container
 
 ENV DEBIAN_FRONTEND="noninteractive" \
