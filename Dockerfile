@@ -56,3 +56,5 @@ RUN find /opt/backarosa -type f -exec chmod +x {} \;
 ENTRYPOINT ["/opt/backarosa/docker-entrypoint.sh"]
 # ENTRYPOINT is for setting the entrypoint for the container, so when u run the container it will run the script inside the entrypoint
 # Basically this is the main script that will be executed when u run the container, and will run all the other scripts inside the image with exec "$@"
+
+ENTRYPOINT ["/opt/backarosa/docker-entrypoint.sh"]
