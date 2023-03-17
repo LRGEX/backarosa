@@ -8,7 +8,8 @@ ENV DEBIAN_FRONTEND="noninteractive" \
     PATH=$PATH:/opt/backarosa \
     BACKAROSA_SOURCE="/source" \
     KEEP_VERSIONS="3" \
-    TZ="Asia/Riyadh" 
+    TZ="Asia/Riyadh" \
+    SAFE_BACKUP="true" 
 # ENV is for runtime, so u can use it as variable in the container   
 
 # RUN is for executing commands in the container while building the image
