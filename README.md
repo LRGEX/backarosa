@@ -32,14 +32,14 @@ To **backup** your container you need to run this command
 
 ````dockerfile
 docker run -d \
---keep-versions="2" \ #--optional if you need to increase/decrease versions, default is 3
+-e KEEP_VERSIONS="2" \
 -v <volume_name>:/source:ro \
 -v /var/run/docker.sock:/var/run/docker.sock \
--e TZ="Asia/Riyadh" \ # insert your TimeZone
--e MEGA_DIR="path/to/folder" \ #path for the directioy inside your mega drive
+-e TZ="Asia/Riyadh" \
+-e MEGA_DIR="path/to/folder" \
 -e MEGA_EMAIL="Yourmail@example.com" \
--e MEGA_PASSWORD="Yourpassword" \
--e CRON="* * * * *" \ #[optional] periodic backup using crontab format 
+-e MEGA_PASSWORD='Yourpassword' \
+-e CRON="* * * * *" \
 --restart always \
 --name <insert_name> lrgex/backarosa backup
 
@@ -53,13 +53,13 @@ To **backup** your container, first you need to visit this [link](https://duplic
 
 ```dockerfile
 docker run -d \
---keep-versions="2" \ #optional if you need to increase/decrease versions, default is 3
+-e KEEP_VERSIONS="2" \
 -v <volume_name>:/source:ro \
 -v /var/run/docker.sock:/var/run/docker.sock \
--e TZ="Asia/Riyadh" \ # insert your TimeZone
--e DROPBOX_DIR="path/to/folder" \ #path for the directioy inside your Dropbox drive
--e DROPBOX_AUTHID="paste your DROPBOX_AUTHID" \ #visit the link above
--e CRON="* * * * *" \  # [optional] periodic backup using crontab format
+-e TZ="Asia/Riyadh" \
+-e DROPBOX_DIR="path/to/folder" \
+-e DROPBOX_AUTHID='paste your DROPBOX_AUTHID'
+-e CRON="* * * * *" \
 --restart always \
 --name <insert_name> lrgex/backarosa backup
 ```
@@ -74,13 +74,13 @@ To **backup** your container, first you need to visit this [link](https://duplic
 
 ```dockerfile
 docker run -d \
---keep-versions="2" \ #[optional] if you need to increase/decrease versions, default is 3
+-e KEEP_VERSIONS="2" \
 -v <volume_name>:/source:ro \
 -v /var/run/docker.sock:/var/run/docker.sock \
--e TZ="Asia/Riyadh" \ # insert your TimeZone
--e GDRIVE_DIR="path/to/folder" \ #path for the directioy inside your Dropbox drive
--e GDRIVE_AUTHID="paste your DROPBOX_AUTHID" \ #visit the link above
--e CRON="* * * * *" \  # [optional] periodic backup using crontab format 
+-e TZ="Asia/Riyadh" \
+-e GDRIVE_DIR="path/to/folder" \
+-e GDRIVE_AUTHID='paste your DROPBOX_AUTHID' \
+-e CRON="* * * * *" \
 --restart always \
 --name <insert_name> lrgex/backarosa backup
 ```
@@ -97,13 +97,13 @@ To backup your container into local folder you need to run this command
 
 ``` dockerfile
 docker run -d \
---keep-versions="2" \ #[optional] if you need to increase/decrease versions, default is 3
--v <path/to/local_folder>:/backup \ #this is the folder that you want to backup to
+-e KEEP_VERSIONS="2" \
+-v <path/to/local_folder>:/backup \
 -v <volume_name>:/source:ro \
 -v /var/run/docker.sock:/var/run/docker.sock \
--e LOCAL_BACKUP="true" \ 
--e TZ="Asia/Riyadh" \ # insert your TimeZone
--e CRON="* * * * *" \ # [optional] periodic backup using crontab format 
+-e LOCAL_BACKUP="true" \
+-e TZ="Asia/Riyadh" \
+-e CRON="* * * * *" \
 --restart always \
 --name <insert_name> lrgex/backarosa backup
 ```
@@ -129,8 +129,8 @@ To restore using Mega Drive, you need to run this command :
 ```dockerfile
 docker run --rm \
 -v <volume_name>:/source \
--e TZ="Asia/Riyadh" \ # insert your TimeZone
--e MEGA_DIR="path/to/folder" \ #path for the directioy inside your mega drive
+-e TZ="Asia/Riyadh" \
+-e MEGA_DIR="/path/to/folder" \
 -e MEGA_EMAIL="Yourmail@example.com" \
 -e MEGA_PASSWORD="Yourpassword" \
 lrgex/backarosa restore
@@ -143,8 +143,8 @@ To restore using Dropbox, you need to run this command, please refer to Dropbox 
 ````dockerfile
 docker run --rm \
 -v <volume_name>:/source \
--e TZ="Asia/Riyadh" \ # insert your TimeZone
--e DROPBOX_DIR="path/to/folder" \ #path for the directioy inside your mega drive
+-e TZ="Asia/Riyadh" \
+-e DROPBOX_DIR="/path/to/folder" \
 -e DROPBOX_AUTHID="paste your DROPBOX_AUTHID" \
 lrgex/backarosa restore
 ````
@@ -158,8 +158,8 @@ To restore using Google Drive, you need to run this command , please refer to Go
 ```dockerfile
 docker run --rm \
 -v <volume_name>:/source \
--e TZ="Asia/Riyadh" \ # insert your TimeZone
--e GDRIVE_DIR="path/to/folder" \ #path for the directioy inside your mega drive
+-e TZ="Asia/Riyadh" \
+-e GDRIVE_DIR="/path/to/folder" \
 -e GDRIVE_AUTHID="paste your GDRIVE_AUTHID" \
 lrgex/backarosa restore
 ```
@@ -175,7 +175,7 @@ docker run --rm \
 -v <path/to/local_folder>:/backup \
 -v <volume_name>:/source \
 -e LOCAL_BACKUP="true" \
--e TZ="Asia/Riyadh" \ # insert your TimeZone
+-e TZ="Asia/Riyadh" \
 lrgex/backarosa restore
 ```
 
@@ -197,15 +197,15 @@ lrgex/backarosa restore
 
   ```dockerfile
   docker run -d \
-  --keep-versions="2" \ #[optional] if you need to increase/decrease versions, default is 3
+  -e KEEP_VERSIONS="2" \
   -v <volume_name>:/source:ro \
-  -v <path/to/local_folder>:/backup \ #this is the folder that you want to backup to
+  -v <path/to/local_folder>:/backup \
   -v /var/run/docker.sock:/var/run/docker.sock \
-  -e LOCAL_BACKUP="true" \ 
-  -e TZ="Asia/Riyadh" \ # insert your TimeZone
-  -e GDRIVE_DIR="path/to/folder" \ #path for the directioy inside your Dropbox drive
-  -e GDRIVE_AUTHID="paste your DROPBOX_AUTHID" \ #visit the link above
-  -e CRON="* * * * *" \  # [optional] periodic backup using crontab format 
+  -e LOCAL_BACKUP="true" \
+  -e TZ="Asia/Riyadh" \
+  -e GDRIVE_DIR="/path/to/folder" \
+  -e GDRIVE_AUTHID="paste your DROPBOX_AUTHID" \
+  -e CRON="* * * * *" \
   --restart always \
   --name <insert_name> lrgex/backarosa backup
   ```
