@@ -12,7 +12,6 @@ if [ -n "${MEGA_EMAIL}" ] && [ -n "${MEGA_PASSWORD}" ]; then
   if [ "${SAFE_BACKUP}" == "true" ]; then
     container_stop
     duplicati-cli backup "mega://${MEGA_DIR}" "${BACKAROSA_SOURCE}" --auth-username="${MEGA_EMAIL}" --auth-password="${MEGA_PASSWORD}" --no-encryption="true" --keep-versions="${KEEP_VERSIONS}"
-    container_start
   else
     duplicati-cli backup "mega://${MEGA_DIR}" "${BACKAROSA_SOURCE}" --auth-username="${MEGA_EMAIL}" --auth-password="${MEGA_PASSWORD}" --no-encryption="true" --keep-versions="${KEEP_VERSIONS}"
   fi
@@ -32,7 +31,6 @@ if [ "${LOCAL_BACKUP}" == "true" ]; then
   if [ "${SAFE_BACKUP}" == "true" ]; then
     container_stop
     duplicati-cli backup "file://${BACKAROSA_BACKUP}" "${BACKAROSA_SOURCE}" --no-encryption="true" --keep-versions="${KEEP_VERSIONS}"
-    container_start
   else
     duplicati-cli backup "file://${BACKAROSA_BACKUP}" "${BACKAROSA_SOURCE}" --no-encryption="true" --keep-versions="${KEEP_VERSIONS}"
   fi
@@ -45,6 +43,13 @@ fi
 # ====================== GDRIVE SECTION ===================
 #==========================================================
 if [ -n "${GDRIVE_AUTHID}" ]; then
+cat << EOF
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
+
+              BACKAROSA GDRIVE BACKUP
+
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
+EOF
   duplicati-cli find "googledrive://${GDRIVE_DIR}" --authid="${GDRIVE_AUTHID}" --no-encryption="true" --number-of-retries=1 > /dev/null 2>&1 # check if mega folder exists
   if [ $? -eq 0 ]; then
     duplicati-cli repair "googledrive://${GDRIVE_DIR}" --authid="${GDRIVE_AUTHID}" --no-encryption="true" --number-of-retries=1
@@ -52,7 +57,6 @@ if [ -n "${GDRIVE_AUTHID}" ]; then
   if [ "${SAFE_BACKUP}" == "true" ]; then
     container_stop
     duplicati-cli backup "googledrive://${GDRIVE_DIR}" "${BACKAROSA_SOURCE}" --authid="${GDRIVE_AUTHID}" --no-encryption="true" --keep-versions="${KEEP_VERSIONS}"
-    container_start
   else
     duplicati-cli backup "googledrive://${GDRIVE_DIR}" "${BACKAROSA_SOURCE}" --authid="${GDRIVE_AUTHID}" --no-encryption="true" --keep-versions="${KEEP_VERSIONS}"
   fi
@@ -72,7 +76,6 @@ if [ -n "${DROPBOX_AUTHID}" ]; then
   if [ "${SAFE_BACKUP}" == "true" ]; then
     container_stop
     duplicati-cli backup "dropbox://${DROPBOX_DIR}" "${BACKAROSA_SOURCE}" --authid="${DROPBOX_AUTHID}" --no-encryption="true" --keep-versions="${KEEP_VERSIONS}"
-    container_start
   else
     duplicati-cli backup "dropbox://${DROPBOX_DIR}" "${BACKAROSA_SOURCE}" --authid="${DROPBOX_AUTHID}" --no-encryption="true" --keep-versions="${KEEP_VERSIONS}"
   fi
@@ -90,7 +93,7 @@ fi
 
 
 
-
+container_start
 #==========================================================
 #======================= CRON SECTION =====================
 #==========================================================
