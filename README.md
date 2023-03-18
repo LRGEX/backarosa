@@ -2,7 +2,12 @@
 
 # <div align="center">Backarosa</div>
 
-<p align="center">Automated Docker volume backup and restore to most common backends, developed by LRGEX Group, powered by Duplicati and it works on both x86 and ARM architechture.</p> 
+<p align="center">Automated Docker volume backup and restore to most common backends, developed by LRGEX Group, powered by Duplicati and it works on both x86 and ARM architechture.</p>
+
+# Developers : 
+* Hesham Mohammed ALAHDAL aka L.R.G
+* Nidhal A. Brniyah aka EZMEx 
+
 
 ## List of supported backends :  
 
