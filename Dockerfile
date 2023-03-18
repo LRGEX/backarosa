@@ -6,6 +6,7 @@ ARG DUPLICATI_RELEASE
 
 ENV DEBIAN_FRONTEND="noninteractive" \
     PATH=$PATH:/opt/backarosa \
+    BACKAROSA_BACKUP="/backup"\
     BACKAROSA_SOURCE="/source" \
     KEEP_VERSIONS="3" \
     TZ="Asia/Riyadh" \
@@ -44,7 +45,7 @@ RUN apt-get update -y && apt-get upgrade -y && apt-get install -y \
     /tmp/* \
     /var/lib/apt/lists/* \
     /var/tmp/* && \
-    mkdir /source 
+    mkdir /source /backup
   
 
 USER root

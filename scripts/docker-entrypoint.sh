@@ -1,5 +1,15 @@
 #!/bin/bash
-
+cat << "EOF"
+██╗     ██████╗  ██████╗ ███████╗██╗  ██╗
+██║     ██╔══██╗██╔════╝ ██╔════╝╚██╗██╔╝
+██║     ██████╔╝██║  ███╗█████╗   ╚███╔╝ 
+██║     ██╔══██╗██║   ██║██╔══╝   ██╔██╗ 
+███████╗██║  ██║╚██████╔╝███████╗██╔╝ ██╗
+╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚═╝  ╚═╝ 
+╔╗ ┌─┐┌─┐┬┌─┌─┐┬─┐┌─┐┌─┐┌─┐
+╠╩╗├─┤│  ├┴┐├─┤├┬┘│ │└─┐├─┤
+╚═╝┴ ┴└─┘┴ ┴┴ ┴┴└─└─┘└─┘┴ ┴    v0.1.0                                  
+EOF
 ln -snf /usr/share/zoneinfo/"${TZ}" /etc/localtime && echo "${TZ}" > /etc/timezone # Set timezone for ubuntu
 env >> /etc/environment # This is needed for variables to be available to cron jobs or other programs
 

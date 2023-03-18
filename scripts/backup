@@ -29,5 +29,28 @@ fi
 #==========================================================
 
 #==========================================================
-# ====================== FTP SECTION ======================
+# ====================== LOCAL SECTION ====================
+#==========================================================
+if [ "${LOCAL_BACKUP}" == "true" ]; then
+  duplicati-cli find "file://${BACKAROSA_BACKUP}" --no-encryption="true" --number-of-retries=1 > /dev/null 2>&1 # check if mega folder exists
+  if [ $? -eq 0 ]; then
+    duplicati-cli repair "file://${BACKAROSA_BACKUP}" --no-encryption="true" --number-of-retries=1
+  fi
+  if [ "${SAFE_BACKUP}" == "true" ]; then
+    container_stop
+    duplicati-cli backup "file://${BACKAROSA_BACKUP}" "${BACKAROSA_SOURCE}" --no-encryption="true" --keep-versions="${KEEP_VERSIONS}"
+    container_start
+  else
+    duplicati-cli backup "file://${BACKAROSA_BACKUP}" "${BACKAROSA_SOURCE}" --no-encryption="true" --keep-versions="${KEEP_VERSIONS}"
+  fi
+  cron_exist=$(cat /etc/crontab 2>/dev/null | grep "root" | awk -F" root" '{print $1}')
+  if [ -n "${CRON}" ] && [ "$cron_exist" != "${CRON}" ]; then
+    rm /etc/crontab
+    # > /proc/1/fd/1 2> /proc/1/fd/2 redirect output to docker logs when working inside container
+    echo -e "${CRON} root /opt/backarosa/backup > /proc/1/fd/1 2> /proc/1/fd/2 \n" >> /etc/crontab
+    cron -f -L 2 # -f run cron in foreground and 2 after cron job , meaning the container will keep running even if cron job fails
+  fi 
+fi
+#==========================================================
+# ================== END OF LOCAL SECTION =================
 #==========================================================
