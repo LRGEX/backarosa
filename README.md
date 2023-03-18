@@ -88,7 +88,7 @@ docker run -d -it \
 -e GDRIVE_DIR="path/to/folder" \ #path for the directioy inside your Dropbox drive
 -e GDRIVE_AUTHID="paste your DROPBOX_AUTHID" \
 -e CRON="* * * * *" \  # [optional] periodic backup using crontab format 
--name backarosa lrgex/backarosa:latest backup
+--name backarosa lrgex/backarosa:latest backup
 ```
 
 
