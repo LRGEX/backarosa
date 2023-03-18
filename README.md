@@ -133,7 +133,7 @@ docker run --rm \
 -e MEGA_DIR="path/to/folder" \ #path for the directioy inside your mega drive
 -e MEGA_EMAIL="Yourmail@example.com" \
 -e MEGA_PASSWORD="Yourpassword" \
---name <insert_name> lrgex/backarosa restore
+lrgex/backarosa restore
 ```
 
 ### Restore using Dropbox : 
@@ -146,7 +146,7 @@ docker run --rm \
 -e TZ="Asia/Riyadh" \ # insert your TimeZone
 -e DROPBOX_DIR="path/to/folder" \ #path for the directioy inside your mega drive
 -e DROPBOX_AUTHID="paste your DROPBOX_AUTHID" \
---name <insert_name> lrgex/backarosa restore
+lrgex/backarosa restore
 ````
 
 
@@ -161,7 +161,7 @@ docker run --rm \
 -e TZ="Asia/Riyadh" \ # insert your TimeZone
 -e GDRIVE_DIR="path/to/folder" \ #path for the directioy inside your mega drive
 -e GDRIVE_AUTHID="paste your GDRIVE_AUTHID" \
---name <insert_name> lrgex/backarosa restore
+lrgex/backarosa restore
 ```
 
 
@@ -176,7 +176,7 @@ docker run --rm \
 -v <volume_name>:/source \
 -e LOCAL_BACKUP="true" \
 -e TZ="Asia/Riyadh" \ # insert your TimeZone
---name <insert_name> lrgex/backarosa restore
+lrgex/backarosa restore
 ```
 
 
