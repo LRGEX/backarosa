@@ -159,7 +159,7 @@ docker run --rm \
 -v <volume_name>:/source \
 -e TZ="Asia/Riyadh" \
 -e DROPBOX_DIR="/path/to/folder" \
--e DROPBOX_AUTHID="paste your DROPBOX_AUTHID" \
+-e DROPBOX_AUTHID='paste your DROPBOX_AUTHID' \
 lrgex/backarosa restore
 ````
 
@@ -174,7 +174,7 @@ docker run --rm \
 -v <volume_name>:/source \
 -e TZ="Asia/Riyadh" \
 -e GDRIVE_DIR="/path/to/folder" \
--e GDRIVE_AUTHID="paste your GDRIVE_AUTHID" \
+-e GDRIVE_AUTHID='paste your GDRIVE_AUTHID' \
 lrgex/backarosa restore
 ```
 
@@ -218,7 +218,7 @@ lrgex/backarosa restore
   -e LOCAL_BACKUP="true" \
   -e TZ="Asia/Riyadh" \
   -e GDRIVE_DIR="/path/to/folder" \
-  -e GDRIVE_AUTHID="paste your DROPBOX_AUTHID" \
+  -e GDRIVE_AUTHID='paste your DROPBOX_AUTHID' \
   -e CRON="* * * * *" \
   --restart always \
   --name <insert_name> lrgex/backarosa backup
