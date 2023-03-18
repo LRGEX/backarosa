@@ -16,13 +16,6 @@ if [ -n "${MEGA_EMAIL}" ] && [ -n "${MEGA_PASSWORD}" ]; then
   else
     duplicati-cli backup "mega://${MEGA_DIR}" "${BACKAROSA_SOURCE}" --auth-username="${MEGA_EMAIL}" --auth-password="${MEGA_PASSWORD}" --no-encryption="true" --keep-versions="${KEEP_VERSIONS}"
   fi
-  cron_exist=$(cat /etc/crontab 2>/dev/null | grep "root" | awk -F" root" '{print $1}')
-  if [ -n "${CRON}" ] && [ "$cron_exist" != "${CRON}" ]; then
-    rm /etc/crontab
-    # > /proc/1/fd/1 2> /proc/1/fd/2 redirect output to docker logs when working inside container
-    echo -e "${CRON} root /opt/backarosa/backup > /proc/1/fd/1 2> /proc/1/fd/2 \n" >> /etc/crontab
-    cron -f -L 2 # -f run cron in foreground and 2 after cron job , meaning the container will keep running even if cron job fails
-  fi 
 fi
 #==========================================================
 #================== END OF MEGA SECTION ===================
@@ -43,13 +36,6 @@ if [ "${LOCAL_BACKUP}" == "true" ]; then
   else
     duplicati-cli backup "file://${BACKAROSA_BACKUP}" "${BACKAROSA_SOURCE}" --no-encryption="true" --keep-versions="${KEEP_VERSIONS}"
   fi
-  cron_exist=$(cat /etc/crontab 2>/dev/null | grep "root" | awk -F" root" '{print $1}')
-  if [ -n "${CRON}" ] && [ "$cron_exist" != "${CRON}" ]; then
-    rm /etc/crontab
-    # > /proc/1/fd/1 2> /proc/1/fd/2 redirect output to docker logs when working inside container
-    echo -e "${CRON} root /opt/backarosa/backup > /proc/1/fd/1 2> /proc/1/fd/2 \n" >> /etc/crontab
-    cron -f -L 2 # -f run cron in foreground and 2 after cron job , meaning the container will keep running even if cron job fails
-  fi 
 fi
 #==========================================================
 # ================== END OF LOCAL SECTION =================
@@ -70,13 +56,6 @@ if [ -n "${GDRIVE_AUTHID}" ]; then
   else
     duplicati-cli backup "googledrive://${GDRIVE_DIR}" "${BACKAROSA_SOURCE}" --authid="${GDRIVE_AUTHID}" --no-encryption="true" --keep-versions="${KEEP_VERSIONS}"
   fi
-  cron_exist=$(cat /etc/crontab 2>/dev/null | grep "root" | awk -F" root" '{print $1}')
-  if [ -n "${CRON}" ] && [ "$cron_exist" != "${CRON}" ]; then
-    rm /etc/crontab
-    # > /proc/1/fd/1 2> /proc/1/fd/2 redirect output to docker logs when working inside container
-    echo -e "${CRON} root /opt/backarosa/backup > /proc/1/fd/1 2> /proc/1/fd/2 \n" >> /etc/crontab
-    cron -f -L 2 # -f run cron in foreground and 2 after cron job , meaning the container will keep running even if cron job fails
-  fi 
 fi
 #==========================================================
 # ================== END OF GDRIVE SECTION ================
@@ -97,15 +76,31 @@ if [ -n "${DROPBOX_AUTHID}" ]; then
   else
     duplicati-cli backup "dropbox://${DROPBOX_DIR}" "${BACKAROSA_SOURCE}" --authid="${DROPBOX_AUTHID}" --no-encryption="true" --keep-versions="${KEEP_VERSIONS}"
   fi
-  cron_exist=$(cat /etc/crontab 2>/dev/null | grep "root" | awk -F" root" '{print $1}')
-  if [ -n "${CRON}" ] && [ "$cron_exist" != "${CRON}" ]; then
-    rm /etc/crontab
-    # > /proc/1/fd/1 2> /proc/1/fd/2 redirect output to docker logs when working inside container
-    echo -e "${CRON} root /opt/backarosa/backup > /proc/1/fd/1 2> /proc/1/fd/2 \n" >> /etc/crontab
-    cron -f -L 2 # -f run cron in foreground and 2 after cron job , meaning the container will keep running even if cron job fails
-  fi 
 fi
 #==========================================================
 # ================== END OF DROPBOX SECTION ===============
 #==========================================================
 
+
+
+
+
+
+
+
+
+
+
+#==========================================================
+#======================= CRON SECTION =====================
+#==========================================================
+cron_exist=$(cat /etc/crontab 2>/dev/null | grep "root" | awk -F" root" '{print $1}')
+  if [ -n "${CRON}" ] && [ "$cron_exist" != "${CRON}" ]; then
+    rm /etc/crontab
+    # > /proc/1/fd/1 2> /proc/1/fd/2 redirect output to docker logs when working inside container
+    echo -e "${CRON} root /opt/backarosa/backup > /proc/1/fd/1 2> /proc/1/fd/2 \n" >> /etc/crontab
+    cron -f -L 2 # -f run cron in foreground and 2 after cron job , meaning the container will keep running even if cron job fails
+  fi
+#==========================================================
+#=================== END OF CRON SECTION ==================
+#==========================================================
