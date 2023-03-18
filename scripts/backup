@@ -5,6 +5,13 @@ source /opt/backarosa/container_stop # this is needed to run container_stop func
 #======================= MEGA SECTION =====================
 #==========================================================
 if [ -n "${MEGA_EMAIL}" ] && [ -n "${MEGA_PASSWORD}" ]; then
+cat << EOF
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
+
+              BACKAROSA MEGA BACKUP
+
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
+EOF
   duplicati-cli find "mega://${MEGA_DIR}" --auth-username="${MEGA_EMAIL}" --auth-password="${MEGA_PASSWORD}" --no-encryption="true" --number-of-retries=1 > /dev/null 2>&1 # check if mega folder exists
   if [ $? -eq 0 ]; then
     duplicati-cli repair "mega://${MEGA_DIR}" --auth-username="${MEGA_EMAIL}" --auth-password="${MEGA_PASSWORD}" --no-encryption="true" --number-of-retries=1
@@ -24,6 +31,13 @@ fi
 # ====================== LOCAL SECTION ====================
 #==========================================================
 if [ "${LOCAL_BACKUP}" == "true" ]; then
+cat << EOF
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
+
+              BACKAROSA LOCAL BACKUP
+
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
+EOF
   duplicati-cli find "file://${BACKAROSA_BACKUP}" --no-encryption="true" --number-of-retries=1 > /dev/null 2>&1 # check if mega folder exists
   if [ $? -eq 0 ]; then
     duplicati-cli repair "file://${BACKAROSA_BACKUP}" --no-encryption="true" --number-of-retries=1
@@ -69,6 +83,13 @@ fi
 # ====================== DROPBOX SECTION ==================
 #==========================================================
 if [ -n "${DROPBOX_AUTHID}" ]; then
+cat << EOF
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
+
+              BACKAROSA DROPBOX BACKUP
+
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
+EOF
   duplicati-cli find "dropbox://${DROPBOX_DIR}" --authid="${DROPBOX_AUTHID}" --no-encryption="true" --number-of-retries=1 > /dev/null 2>&1 # check if mega folder exists
   if [ $? -eq 0 ]; then
     duplicati-cli repair "dropbox://${DROPBOX_DIR}" --authid="${DROPBOX_AUTHID}" --no-encryption="true" --number-of-retries=1
