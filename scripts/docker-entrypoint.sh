@@ -15,7 +15,7 @@ env >> /etc/environment # This is needed for variables to be available to cron j
 # set a trap to catch SIGTERM and SIGINT signals so we can exit gracefully
 #exit the container when the script is finished
 trap 'exit' SIGTERM SIGINT
-if $signal = "done" ; then
+if $signal == "done" ; then
     kill -s SIGTERM 1
 fi
 exec "$@" # This is needed to run other scripts or commands when running the container like docker run -it --rm backarosa:latest /bin/bash, backup,restore,container_start,container_stop ..etc
