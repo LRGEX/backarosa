@@ -21,6 +21,7 @@ RUN apt-get update -y && apt-get upgrade -y && apt-get install -y \
     gnupg \
     cron \
     lsb-release \
+    dumb-init \
     tzdata && \
     # command below is for installing docker cli in the container so it can use dockersock to communicate with the host docker
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg && \
@@ -55,6 +56,6 @@ WORKDIR /opt/backarosa
 COPY scripts/ /opt/backarosa/
 # COPY is for copying script files from what inside script folder (which contain all your scripts) the docker image while building the image
 RUN find /opt/backarosa -type f -exec chmod +x {} \;
-ENTRYPOINT ["/opt/backarosa/docker-entrypoint.sh"]
+ENTRYPOINT ["/usr/bin/dumb-init", "--", "/opt/backarosa/entrypoint.sh"]
 # ENTRYPOINT is for setting the entrypoint for the container, so when u run the container it will run the script inside the entrypoint
 # Basically this is the main script that will be executed when u run the container, and will run all the other scripts inside the image with exec "$@"
