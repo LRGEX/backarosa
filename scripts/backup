@@ -125,7 +125,10 @@ cron_exist=$(cat /etc/crontab 2>/dev/null | grep "root" | awk -F" root" '{print 
     echo -e "${CRON} root /opt/backarosa/backup > /proc/1/fd/1 2> /proc/1/fd/2 \n" >> /etc/crontab
     cron -f -L 2 # -f run cron in foreground and 2 after cron job , meaning the container will keep running even if cron job fails
   fi
-signal="done"
+if [ -z "${CRON}" ]; then
+  kill -s SIGINT 1  
+fi
+# signal="done"
 #==========================================================
 #=================== END OF CRON SECTION ==================
 #==========================================================
