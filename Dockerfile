@@ -55,7 +55,8 @@ WORKDIR /opt/backarosa
 # WORKDIR is for setting the working directory for the container
 COPY scripts/ /opt/backarosa/
 # COPY is for copying script files from what inside script folder (which contain all your scripts) the docker image while building the image
-RUN find /opt/backarosa -type f -exec chmod +x {} \;
+RUN find /opt/backarosa -type f -exec chmod +x {} \; && \
+    mkdir /opt/backarosa/data
 ENTRYPOINT ["/usr/bin/dumb-init", "--", "/opt/backarosa/docker-entrypoint.sh"]
 # ENTRYPOINT is for setting the entrypoint for the container, so when u run the container it will run the script inside the entrypoint
 # Basically this is the main script that will be executed when u run the container, and will run all the other scripts inside the image with exec "$@"
