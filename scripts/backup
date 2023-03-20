@@ -126,7 +126,15 @@ cron_exist=$(cat /etc/crontab 2>/dev/null | grep "root" | awk -F" root" '{print 
     cron -f -L 2 # -f run cron in foreground and 2 after cron job , meaning the container will keep running even if cron job fails
   fi
 if [ -z "${CRON}" ]; then
-  kill -s SIGINT 1
+  if ! [ -f /opt/backarosa/data/container_volumes.txt ]; then
+    container_name=$(cat /etc/hostname)
+    docker inspect -f '{{ .Mounts }}' $container_name  | grep -oP '(?<={volume )[^ ]*' > /opt/backarosa/data/container_volumes.txt
+    container_volumes=( $(cat /opt/backarosa/data/container_volumes.txt) )
+  else
+    container_volumes=( $(cat /opt/backarosa/data/container_volumes.txt) )   
+  fi
+    container_close=$(docker ps -a --filter volume=${container_volumes[0]} | grep "backarosa" | awk '{print $1}' | sed 's/CONTAINER//g')
+    docker stop $container_close > /dev/null 2>&1
 fi
 # signal="done"
 #==========================================================
