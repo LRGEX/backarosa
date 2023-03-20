@@ -136,7 +136,6 @@ if [ -z "${CRON}" ]; then
     container_close=$(docker ps -a --filter volume=${container_volumes[0]} | grep "backarosa" | awk '{print $1}' | sed 's/CONTAINER//g')
     docker stop $container_close > /dev/null 2>&1
 fi
-# signal="done"
 #==========================================================
 #=================== END OF CRON SECTION ==================
 #==========================================================
