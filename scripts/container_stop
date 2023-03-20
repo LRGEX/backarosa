@@ -1,7 +1,12 @@
 #!/bin/bash
 container_stop(){
-    container_name=$(cat /etc/hostname)
-    container_volumes=( $(docker inspect -f '{{ .Mounts }}' $container_name  | grep -oP '(?<={volume )[^ ]*') )
+    if ! [ -f /opt/backarosa/data/container_volumes.txt ]; then
+        container_name=$(cat /etc/hostname)
+        docker inspect -f '{{ .Mounts }}' $container_name  | grep -oP '(?<={volume )[^ ]*' > /opt/backarosa/data/container_volumes.txt >> /dev/null 2>&1
+        container_volumes=( $(cat /opt/backarosa/data/container_volumes.txt) )
+    else
+        container_volumes=( $(cat /opt/backarosa/data/container_volumes.txt) )   
+    fi
     container_close=$(docker ps -a --filter volume=${container_volumes[0]} | sed "/backarosa/d" | awk '{print $1}' | sed 's/CONTAINER//g')
     docker stop $container_close > /dev/null 2>&1
 }
