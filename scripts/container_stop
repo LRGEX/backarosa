@@ -2,7 +2,7 @@
 container_stop(){
     if ! [ -f /opt/backarosa/data/container_volumes.txt ]; then
         container_name=$(cat /etc/hostname)
-        docker inspect -f '{{ .Mounts }}' $container_name  | grep -oP '(?<={volume )[^ ]*' > /opt/backarosa/data/container_volumes.txt >> /dev/null 2>&1
+        docker inspect -f '{{ .Mounts }}' $container_name  | grep -oP '(?<={volume )[^ ]*' > /opt/backarosa/data/container_volumes.txt
         container_volumes=( $(cat /opt/backarosa/data/container_volumes.txt) )
     else
         container_volumes=( $(cat /opt/backarosa/data/container_volumes.txt) )   
