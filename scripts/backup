@@ -119,14 +119,14 @@ container_start
 #======================= CRON SECTION =====================
 #==========================================================
 cron_exist=$(cat /etc/crontab 2>/dev/null | grep "root" | awk -F" root" '{print $1}')
-  if [ -n "${CRON}" ] && [ "$cron_exist" != "${CRON}" ]; then
+  if [ -n "${CRON}" ]; then
     rm /etc/crontab
     # > /proc/1/fd/1 2> /proc/1/fd/2 redirect output to docker logs when working inside container
-    echo -e "${CRON} root /opt/backarosa/backup > /proc/1/fd/1 2> /proc/1/fd/2 \n" >> /etc/crontab
+    echo -e "${CRON} root /opt/backarosa/backup > /proc/1/fd/1 2> /proc/1/fd/2 \n" > /etc/crontab
     cron -f -L 2 # -f run cron in foreground and 2 after cron job , meaning the container will keep running even if cron job fails
   fi
 if [ -z "${CRON}" ]; then
-  kill -s SIGINT 1  
+  kill -s SIGINT 1
 fi
 # signal="done"
 #==========================================================
