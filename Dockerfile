@@ -8,7 +8,7 @@ ENV DEBIAN_FRONTEND="noninteractive" \
     PATH=$PATH:/opt/backarosa \
     BACKAROSA_BACKUP="/backup"\
     BACKAROSA_SOURCE="/source" \
-    KEEP_VERSIONS="3" \
+    KEEP_VERSIONS="100" \
     TZ="Asia/Riyadh" \
     SAFE_BACKUP="true" 
 # ENV is for runtime, so u can use it as variable in the container   

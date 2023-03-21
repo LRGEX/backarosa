@@ -112,7 +112,7 @@ docker run -d \
 
 | Environments / Volumes                           | Description                                                  |
 | ------------------------------------------------ | ------------------------------------------------------------ |
-| **-e KEEP_VERSIONS**                             | [optional] it will increase/decrease the number of backups versions. default is 3 |
+| **-e KEEP_VERSIONS**                             | [optional] it will increase/decrease the number of backups versions. default is 100 |
 | **-v <volume_name>:/source:ro**                  | This is related to your desired volume to be backed up e.g  Sonarr:/source:ro |
 | **-v /var/run/docker.sock:/var/run/docker.sock** | This is the Docker sock, we need that's to start and shutdown containers while backuping |
 | **-e TZ="Asia/Riyadh"**                           | You need to insert your timezone                             |
