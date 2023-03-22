@@ -8,6 +8,9 @@ on:
 jobs:
   docker:
     runs-on: ubuntu-latest
+    paths-ignore:
+      - '**/README.md'
+      - '**/todo'
     steps:
       -
         name: Checkout
