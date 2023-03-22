@@ -4,7 +4,8 @@
 #======================= MEGA SECTION =====================
 #==========================================================
 if [ -n "${MEGA_EMAIL}" ] && [ -n "${MEGA_PASSWORD}" ]; then
-duplicati-cli restore "mega://${MEGA_DIR}" --auth-username="${MEGA_EMAIL}" --auth-password="${MEGA_PASSWORD}" --no-encryption="true" --restore-permissions="true"
+duplicati-cli restore "mega://${MEGA_DIR}" --auth-username="${MEGA_EMAIL}" --auth-password="${MEGA_PASSWORD}" --no-encryption="true" --restore-permissions="true" --version="${RESTORE_VERSION}"
+container_self_stop
 fi
 #==========================================================
 #================== END OF MEGA SECTION ===================
@@ -14,7 +15,8 @@ fi
 # ====================== LOCAL SECTION ====================
 #==========================================================
 if [ "${LOCAL_BACKUP}" == "true" ]; then
-duplicati-cli restore "file://${BACKAROSA_BACKUP}" --no-encryption="true" --restore-permissions="true"
+duplicati-cli restore "file://${BACKAROSA_BACKUP}" --no-encryption="true" --restore-permissions="true" --version="${RESTORE_VERSION}"
+container_self_stop
 fi
 #==========================================================
 # ================== END OF LOCAL SECTION =================
@@ -24,7 +26,8 @@ fi
 # ====================== GDRIVE SECTION ===================
 #==========================================================
 if [ -n "${GDRIVE_AUTHID}" ]; then
-duplicati-cli restore "googledrive://${GDRIVE_DIR}" --authid="${GDRIVE_AUTHID}" --no-encryption="true" --restore-permissions="true"
+duplicati-cli restore "googledrive://${GDRIVE_DIR}" --authid="${GDRIVE_AUTHID}" --no-encryption="true" --restore-permissions="true" --version="${RESTORE_VERSION}"
+container_self_stop
 fi
 #==========================================================
 # ================== END OF GDRIVE SECTION ================
@@ -34,7 +37,8 @@ fi
 # ====================== DROPBOX SECTION ==================
 #==========================================================
 if [ -n "${DROPBOX_AUTHID}" ]; then
-duplicati-cli restore "dropbox://${DROPBOX_DIR}" --authid="${DROPBOX_AUTHID}" --no-encryption="true" --restore-permissions="true"
+duplicati-cli restore "dropbox://${DROPBOX_DIR}" --authid="${DROPBOX_AUTHID}" --no-encryption="true" --restore-permissions="true" --version="${RESTORE_VERSION}"
+container_self_stop
 fi
 #==========================================================
 # ================== END OF DROPBOX SECTION ==============

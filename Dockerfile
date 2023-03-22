@@ -10,7 +10,8 @@ ENV DEBIAN_FRONTEND="noninteractive" \
     BACKAROSA_SOURCE="/source" \
     KEEP_VERSIONS="100" \
     TZ="Asia/Riyadh" \
-    SAFE_BACKUP="true" 
+    SAFE_BACKUP="true" \
+    RESTORE_VERSION="0" 
 # ENV is for runtime, so u can use it as variable in the container   
 
 # RUN is for executing commands in the container while building the image

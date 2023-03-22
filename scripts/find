@@ -1,0 +1,47 @@
+#!/bin/bash
+source /opt/backarosa/container_self_stop # this is needed to run container_self_stop function
+
+if [ -n "${MEGA_EMAIL}" ] && [ -n "${MEGA_PASSWORD}" ]; then
+cat << EOF
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
+
+               BACKAROSA MEGA VERSION CHECK
+
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
+EOF
+  duplicati-cli find "mega://${MEGA_DIR}" --auth-username="${MEGA_EMAIL}" --auth-password="${MEGA_PASSWORD}" --no-encryption="true" --number-of-retries=1
+  container_self_stop
+elif [ "${LOCAL_BACKUP}" == "true" ]; then
+cat << EOF
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
+
+                BACKAROSA LOCCAL VERSION CHECK
+
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
+EOF
+  duplicati-cli find "file://${BACKAROSA_BACKUP}" --no-encryption="true" --number-of-retries=1
+  container_self_stop
+elif [ -n "${GDRIVE_AUTHID}" ]; then
+cat << EOF
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
+
+              BACKAROSA GDRIVE VERSION CHECK
+
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
+EOF
+  duplicati-cli find "googledrive://${GDRIVE_DIR}" --authid="${GDRIVE_AUTHID}" --no-encryption="true" --number-of-retries=1
+  container_self_stop
+elif [ -n "${DROPBOX_AUTHID}" ]; then
+cat << EOF
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
+
+              BACKAROSA DROPBOX VERSION CHECK
+
+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
+EOF
+  duplicati-cli find "dropbox://${DROPBOX_DIR}" --authid="${DROPBOX_AUTHID}" --no-encryption="true" --number-of-retries=1
+  container_self_stop
+else
+container_self_stop
+fi
+

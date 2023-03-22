@@ -1,6 +1,7 @@
 #!/bin/bash
 source /opt/backarosa/container_start # this is needed to run container_start function
 source /opt/backarosa/container_stop # this is needed to run container_stop function
+source /opt/backarosa/container_self_stop # this is needed to run container_self_stop function
 #==========================================================
 #======================= MEGA SECTION =====================
 #==========================================================
@@ -38,7 +39,7 @@ cat << EOF
 
 =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
 EOF
-  duplicati-cli find "file://${BACKAROSA_BACKUP}" --no-encryption="true" --number-of-retries=1 > /dev/null 2>&1 # check if mega folder exists
+  duplicati-cli find "file://${BACKAROSA_BACKUP}" --no-encryption="true" --number-of-retries=1 > /dev/null 2>&1 
   if [ $? -eq 0 ]; then
     duplicati-cli repair "file://${BACKAROSA_BACKUP}" --no-encryption="true" --number-of-retries=1
   fi
@@ -125,17 +126,7 @@ cron_exist=$(cat /etc/crontab 2>/dev/null | grep "root" | awk -F" root" '{print 
     echo -e "${CRON} root /opt/backarosa/backup > /proc/1/fd/1 2> /proc/1/fd/2 \n" > /etc/crontab
     cron -f -L 2 2>/dev/null # -f run cron in foreground and 2 after cron job , meaning the container will keep running even if cron job fails
   fi
-if [ -z "${CRON}" ]; then
-  if ! [ -f /opt/backarosa/data/container_volumes.txt ]; then
-    container_name=$(cat /proc/self/mountinfo | grep "/docker/containers/" | head -1 | awk '{print $4}' | sed 's/\/var\/lib\/docker\/containers\///g' | sed 's/\/resolv.conf//g')
-    docker inspect -f '{{ .Mounts }}' $container_name  | grep -oP '(?<={volume )[^ ]*' > /opt/backarosa/data/container_volumes.txt
-    container_volumes=( $(cat /opt/backarosa/data/container_volumes.txt) )
-  else
-    container_volumes=( $(cat /opt/backarosa/data/container_volumes.txt) )   
-  fi
-    container_close=$(docker ps -a --filter volume=${container_volumes[0]} | grep "backarosa" | awk '{print $1}' | sed 's/CONTAINER//g')
-    docker stop $container_close > /dev/null 2>&1
-fi
+container_self_stop
 #==========================================================
 #=================== END OF CRON SECTION ==================
 #==========================================================
