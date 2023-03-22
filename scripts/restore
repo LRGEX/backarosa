@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source /opt/backarosa/container_self_stop # this is needed to run container_self_stop function
+
 #==========================================================
 #======================= MEGA SECTION =====================
 #==========================================================
