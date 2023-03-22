@@ -105,21 +105,27 @@ docker run -d \
 -e TZ="Asia/Riyadh" \
 -e CRON="* * * * *" \
 --restart always \
---name <insert_name> lrgex/backarosa backup
+--name <insert_name> lrgex/backarosa backup			
 ```
 
--------------------------
+
+
+--------------------------
+
+
+
+### Backup options
 
 | Environments / Volumes                           | Description                                                  |
 | ------------------------------------------------ | ------------------------------------------------------------ |
 | **-e KEEP_VERSIONS**                             | [optional] it will increase/decrease the number of backups versions. default is 100 |
 | **-v <volume_name>:/source:ro**                  | This is related to your desired volume to be backed up e.g  Sonarr:/source:ro |
 | **-v /var/run/docker.sock:/var/run/docker.sock** | This is the Docker sock, we need that's to start and shutdown containers while backuping |
-| **-e TZ="Asia/Riyadh"**                           | You need to insert your timezone                             |
+| **-e TZ="Asia/Riyadh"**                          | You need to insert your timezone                             |
 | **-e MEGA_DIR="/path/to/folder"**                | This is the path for the directory inside your mega drive e.g /mybackups/docker_container_backup |
 | -e CRON="* * * * *"                              | [optional] periodic backup using crontab format              |
 | **-e DROPBOX_DIR="/path/to/folder"**             | The path for the directory inside your Dropbox drive         |
-| **-e GDRIVE_DIR="/path/to/folder"**              | #path for the directory inside your Google Drive drive            |
+| **-e GDRIVE_DIR="/path/to/folder"**              | #path for the directory inside your Google Drive drive       |
 | **-e DROPBOX_AUTHID='paste_Token'**              | First you need to get your token from the link [check backup section], copy it and paste its value here |
 | **-e GDRIVE_AUTHID='paste_Token'**               | First you need to get your token from the link [check backup section], copy it and paste its value here |
 
@@ -147,6 +153,7 @@ docker run --rm \
 -e MEGA_DIR="/path/to/folder" \
 -e MEGA_EMAIL="Yourmail@example.com" \
 -e MEGA_PASSWORD="Yourpassword" \
+-e RESTORE_VERSION="0" \
 lrgex/backarosa restore
 ```
 
@@ -160,6 +167,7 @@ docker run --rm \
 -e TZ="Asia/Riyadh" \
 -e DROPBOX_DIR="/path/to/folder" \
 -e DROPBOX_AUTHID='paste your DROPBOX_AUTHID' \
+-e RESTORE_VERSION="0" \
 lrgex/backarosa restore
 ````
 
@@ -175,6 +183,7 @@ docker run --rm \
 -e TZ="Asia/Riyadh" \
 -e GDRIVE_DIR="/path/to/folder" \
 -e GDRIVE_AUTHID='paste your GDRIVE_AUTHID' \
+-e RESTORE_VERSION="0" \
 lrgex/backarosa restore
 ```
 
@@ -190,10 +199,19 @@ docker run --rm \
 -v <volume_name>:/source \
 -e LOCAL_BACKUP="true" \
 -e TZ="Asia/Riyadh" \
+-e RESTORE_VERSION="0" \
 lrgex/backarosa restore
 ```
 
+---------------
 
+### Restore Options 
+
+
+
+| Environments / Volumes |                         Description                          |
+| :--------------------: | :----------------------------------------------------------: |
+| -e RESTORE_VERSION="0" | [Optional], use this if you want to restore to a specific backup version, default =0, you can see all versions available by using the tag <find> instead of <restore> in the last command line |
 
 
 
@@ -225,6 +243,3 @@ lrgex/backarosa restore
   ```
 
    
-
-
-
