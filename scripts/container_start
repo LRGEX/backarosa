@@ -2,7 +2,7 @@
 container_start(){
     if ! [ -f /opt/backarosa/data/container_volumes.txt ]; then
         container_name=$(cat /proc/self/mountinfo | grep "/docker/containers/" | head -1 | awk '{print $4}' | sed 's/\/var\/lib\/docker\/containers\///g' | sed 's/\/resolv.conf//g')
-        docker inspect -f '{{ .Mounts }}' $container_name  | grep -oP '(?<={volume )[^ ]*' > /opt/backarosa/data/container_volumes.txt
+        docker inspect -f '{{ .Mounts }}' $container_name | grep -oP '(?<={volume )[^ ]*' > /opt/backarosa/data/container_volumes.txt
         container_volumes=( $(cat /opt/backarosa/data/container_volumes.txt) )
     else
         container_volumes=( $(cat /opt/backarosa/data/container_volumes.txt) )   

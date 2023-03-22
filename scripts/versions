@@ -5,7 +5,7 @@ if [ -n "${MEGA_EMAIL}" ] && [ -n "${MEGA_PASSWORD}" ]; then
 cat << EOF
 =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
 
-               BACKAROSA MEGA VERSION CHECK
+               BACKAROSA MEGA VERSIONS LIST
 
 =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
 EOF
@@ -15,7 +15,7 @@ elif [ "${LOCAL_BACKUP}" == "true" ]; then
 cat << EOF
 =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
 
-                BACKAROSA LOCCAL VERSION CHECK
+                BACKAROSA LOCCAL VERSIONS LIST
 
 =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
 EOF
@@ -25,7 +25,7 @@ elif [ -n "${GDRIVE_AUTHID}" ]; then
 cat << EOF
 =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
 
-              BACKAROSA GDRIVE VERSION CHECK
+              BACKAROSA GDRIVE VERSIONS LIST
 
 =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
 EOF
@@ -35,7 +35,7 @@ elif [ -n "${DROPBOX_AUTHID}" ]; then
 cat << EOF
 =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
 
-              BACKAROSA DROPBOX VERSION CHECK
+              BACKAROSA DROPBOX VERSIONS LIST
 
 =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
 EOF
