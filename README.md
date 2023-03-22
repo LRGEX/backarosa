@@ -211,7 +211,7 @@ lrgex/backarosa restore
 
 | Environments / Volumes |                         Description                          |
 | :--------------------: | :----------------------------------------------------------: |
-| -e RESTORE_VERSION="0" | [Optional], use this if you want to restore to a specific backup version, default =0, you can see all versions available by using the tag <find> instead of <restore> in the last command line |
+| -e RESTORE_VERSION="0" | [Optional], use this if you want to restore to a specific backup version, default =0, you can see all versions available by using the command find instead of restore in the last command line |
 
 
 
