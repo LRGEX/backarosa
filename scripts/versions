@@ -15,7 +15,7 @@ elif [ "${LOCAL_BACKUP}" == "true" ]; then
 cat << EOF
 =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
 
-                BACKAROSA LOCCAL VERSIONS LIST
+                BACKAROSA LOCAL VERSIONS LIST
 
 =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
 EOF
