@@ -253,12 +253,15 @@ lrgex/backarosa restore
   --name <insert_name> lrgex/backarosa backup
   ```
 
+  
+
 📜 License
+
 This project is licensed under the Apache License 2.0.
 See the LICENSE file for more details.
+
+
 ## Stay Up-to-Date
-
-
 ⭐ ${\normalsize{\textcolor{goldenrod}{\texttt{Star this project}}}}$
 
 Watch for releases and updates.
