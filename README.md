@@ -1,13 +1,14 @@
 <p align="center"><img src="http://cloud.lrgex.com/s/mCxTfnA2bikjYyZ/download/Dark%20Full%20Logo.png" alt= “” width="400" height="100"></p>
 
 # <div align="center">Backarosa</div>
+![GitHub License](https://img.shields.io/github/license/LRGEX/backarosa)
+![GitHub Stars](https://img.shields.io/github/stars/LRGEX/backarosa?style=social)
+![Docker Pulls](https://img.shields.io/docker/pulls/lrgex/backarosa)
 
 <p align="center">Automated Docker volume backup and restore to most common backends, developed by LRGEX Group, powered by Duplicati and it works on both x86 and ARM architecture.</p> 
 
 
-![GitHub License](https://img.shields.io/github/license/LRGEX/backarosa)
-![GitHub Stars](https://img.shields.io/github/stars/LRGEX/backarosa?style=social)
-![Docker Pulls](https://img.shields.io/docker/pulls/lrgex/backarosa)
+
 
 
 ## List of supported backends :  
