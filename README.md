@@ -1,50 +1,53 @@
-<p align="center"><img src="http://cloud.lrgex.com/s/mCxTfnA2bikjYyZ/download/Dark%20Full%20Logo.png" alt= “” width="400" height="100"></p>
+<p align="center"><img src="http://cloud.lrgex.com/s/mCxTfnA2bikjYyZ/download/Dark%20Full%20Logo.png" alt="Backarosa Logo" width="400" height="100"></p>
 
 # <div align="center">Backarosa</div>
 
-<p align="center">Automated Docker volume backup and restore to most common backends, developed by LRGEX Group, powered by Duplicati and it works on both x86 and ARM architechture.</p> 
+<p align="center">Automated Docker volume backup and restore to common backends, developed by LRGEX Group. Powered by Duplicati, it supports both x86 and ARM architectures.</p>
 
-## List of supported backends :  
+---
 
+## 🚀 Features
+- 📦 **Automatic backups** for Docker volumes
+- 🔄 **Supports multiple cloud storage providers** (Mega, Dropbox, Google Drive)
+- 💾 **Local backup support**
+- 🏗 **Works on both x86 and ARM architectures**
+- ⚡ **Simple and lightweight, powered by Duplicati**
 
+## 📌 Table of Contents
+- [Supported Backends](#supported-backends)
+- [Getting Started](#getting-started)
+- [How to Use Backarosa (Backup)](#how-to-use-backarosa-backup)
+- [How to Use Backarosa (Restore)](#how-to-use-backarosa-restore)
+- [Backup Options](#backup-options)
+- [Restore Options](#restore-options)
+- [Support & Contributions](#support-me)
+- [License](#license)
 
-1 - **Mega Drive** 
+## ✅ Supported Backends
+1. **Mega Drive**
+2. **Dropbox**
+3. **Google Drive**
+4. **Local Folder**
 
-2 - **Dropbox**
+We will continue adding more!
 
-3 - **Google Drive** 
+---
 
-4 - **Local folder** 
+## 🚀 Getting Started
+To use Backarosa, first pull the latest Docker image:
+```bash
+docker pull lrgex/backarosa:latest
+```
 
-and we will continue to add more! 
+Then, follow the backup and restore instructions below.
 
+---
 
-## Stay Up-to-Date
+## 📂 How to Use Backarosa (Backup)
+This section covers **backup commands** only. For restoring, see the **restore section** below.
 
-⭐ ${\normalsize{\textcolor{goldenrod}{\texttt{Star this project}}}}$
-
-Watch for releases and updates.
-
-<img src="https://download.lrgex.com/assets/images/givestar.gif" width="500" alt='github star'/>
-
-
-## Support Me
-
-Please ⭐ star this repository!
-
-If you found my work useful, consider buying me a [<img src="https://download.lrgex.com/assets/images/coffee.png" height="20" alt='Ko-fi'/>](https://ko-fi.com/lrgex).
-
-## How to use Backarosa backup command ? 
-
-This section is for **Backarosa backup** commands only, you can find more info about restore function in the **Backarosa restore section**.
-
-
-
-### Backup using Mega drive  :
-
-To **backup** your container you need to run this command 
-
-````dockerfile
+### 🔹 Backup using Mega Drive
+```bash
 docker run -d \
 -e KEEP_VERSIONS="2" \
 -v <volume_name>:/source:ro \
@@ -56,60 +59,40 @@ docker run -d \
 -e CRON="* * * * *" \
 --restart always \
 --name <insert_name> lrgex/backarosa backup
+```
 
-````
-
----------------------------------------------------------------------------------------------------------
-
-### Backup using Dropbox  :
-
-To **backup** your container, first you need to visit this [link](https://duplicati-oauth-handler.appspot.com/?type=dropbox) and get your DROPBOX_AUTHID, copy the token then  run this command 
-
-```dockerfile
+### 🔹 Backup using Dropbox
+Get your `DROPBOX_AUTHID` from [this link](https://duplicati-oauth-handler.appspot.com/?type=dropbox) and use:
+```bash
 docker run -d \
 -e KEEP_VERSIONS="2" \
 -v <volume_name>:/source:ro \
 -v /var/run/docker.sock:/var/run/docker.sock \
 -e TZ="Asia/Riyadh" \
 -e DROPBOX_DIR="path/to/folder" \
--e DROPBOX_AUTHID='paste your DROPBOX_AUTHID'
+-e DROPBOX_AUTHID='your_DROPBOX_AUTHID' \
 -e CRON="* * * * *" \
 --restart always \
 --name <insert_name> lrgex/backarosa backup
 ```
 
-
-
----------------------------------------------------------------
-
-### Backup using Google drive :
-
-To **backup** your container, first you need to visit this [link](https://duplicati-oauth-handler.appspot.com/?type=googledrive) and get your GDRIVE_AUTHID, copy the token then  run this command 
-
-```dockerfile
+### 🔹 Backup using Google Drive
+Get your `GDRIVE_AUTHID` from [this link](https://duplicati-oauth-handler.appspot.com/?type=googledrive) and use:
+```bash
 docker run -d \
 -e KEEP_VERSIONS="2" \
 -v <volume_name>:/source:ro \
 -v /var/run/docker.sock:/var/run/docker.sock \
 -e TZ="Asia/Riyadh" \
 -e GDRIVE_DIR="path/to/folder" \
--e GDRIVE_AUTHID='paste your DROPBOX_AUTHID' \
+-e GDRIVE_AUTHID='your_GDRIVE_AUTHID' \
 -e CRON="* * * * *" \
 --restart always \
 --name <insert_name> lrgex/backarosa backup
 ```
 
-
-
---------------------
-
-
-
-### Backup using Local Folder  :
-
-To backup your container into local folder you need to run this command 
-
-``` dockerfile
+### 🔹 Backup using Local Folder
+```bash
 docker run -d \
 -e KEEP_VERSIONS="2" \
 -v <path/to/local_folder>:/backup \
@@ -119,48 +102,15 @@ docker run -d \
 -e TZ="Asia/Riyadh" \
 -e CRON="* * * * *" \
 --restart always \
---name <insert_name> lrgex/backarosa backup			
+--name <insert_name> lrgex/backarosa backup
 ```
 
+---
 
+## 🔄 How to Use Backarosa (Restore)
 
---------------------------
-
-
-
-### Backup options
-
-| Environments / Volumes                           | Description                                                  |
-| ------------------------------------------------ | ------------------------------------------------------------ |
-| **-e KEEP_VERSIONS**                             | [optional] it will increase/decrease the number of backups versions. default is 100 |
-| **-v <volume_name>:/source:ro**                  | This is related to your desired volume to be backed up e.g  Sonarr:/source:ro |
-| **-v /var/run/docker.sock:/var/run/docker.sock** | This is the Docker sock, we need that's to start and shutdown containers while backuping |
-| **-e TZ="Asia/Riyadh"**                          | You need to insert your timezone                             |
-| **-e MEGA_DIR="/path/to/folder"**                | This is the path for the directory inside your mega drive e.g /mybackups/docker_container_backup |
-| -e CRON="* * * * *"                              | [optional] periodic backup using crontab format              |
-| **-e DROPBOX_DIR="/path/to/folder"**             | The path for the directory inside your Dropbox drive         |
-| **-e GDRIVE_DIR="/path/to/folder"**              | #path for the directory inside your Google Drive drive       |
-| **-e DROPBOX_AUTHID='paste_Token'**              | First you need to get your token from the link [check backup section], copy it and paste its value here |
-| **-e GDRIVE_AUTHID='paste_Token'**               | First you need to get your token from the link [check backup section], copy it and paste its value here |
-
-
---------------------------
-
-------------------
-
-----------------
-
-
-
-## How to use Backarosa restore command ? 
-
-this section is for Backarosa restore commands only 
-
-### Restore using Mega Drive : 
-
-To restore using Mega Drive, you need to run this command : 
-
-```dockerfile
+### 🔹 Restore using Mega Drive
+```bash
 docker run --rm \
 -v <volume_name>:/source \
 -e TZ="Asia/Riyadh" \
@@ -171,43 +121,30 @@ docker run --rm \
 lrgex/backarosa restore
 ```
 
-### Restore using Dropbox : 
-
-To restore using Dropbox, you need to run this command, please refer to Dropbox backup section to learn more on how to get your DROPBOX_AUTHID
-
-````dockerfile
+### 🔹 Restore using Dropbox
+```bash
 docker run --rm \
 -v <volume_name>:/source \
 -e TZ="Asia/Riyadh" \
 -e DROPBOX_DIR="/path/to/folder" \
--e DROPBOX_AUTHID='paste your DROPBOX_AUTHID' \
--e RESTORE_VERSION="0" \
-lrgex/backarosa restore
-````
-
-
-
-### Restore using Google Drive : 
-
-To restore using Google Drive, you need to run this command , please refer to Google Drive backup section to learn more on how to get your GDRIVE_AUTHID 
-
-```dockerfile
-docker run --rm \
--v <volume_name>:/source \
--e TZ="Asia/Riyadh" \
--e GDRIVE_DIR="/path/to/folder" \
--e GDRIVE_AUTHID='paste your GDRIVE_AUTHID' \
+-e DROPBOX_AUTHID='your_DROPBOX_AUTHID' \
 -e RESTORE_VERSION="0" \
 lrgex/backarosa restore
 ```
 
+### 🔹 Restore using Google Drive
+```bash
+docker run --rm \
+-v <volume_name>:/source \
+-e TZ="Asia/Riyadh" \
+-e GDRIVE_DIR="/path/to/folder" \
+-e GDRIVE_AUTHID='your_GDRIVE_AUTHID' \
+-e RESTORE_VERSION="0" \
+lrgex/backarosa restore
+```
 
-
-### Restore using Local Folder : 
-
-To restore using Local folder, you need to run this command 
-
-```dockerfile
+### 🔹 Restore using Local Folder
+```bash
 docker run --rm \
 -v <path/to/local_folder>:/backup \
 -v <volume_name>:/source \
@@ -217,45 +154,22 @@ docker run --rm \
 lrgex/backarosa restore
 ```
 
----------------
+---
 
-### Restore Options 
+## 🛠 Backup Options
+| Environment Variable | Description |
+|---------------------|-------------|
+| `-e KEEP_VERSIONS` | (Optional) Number of backup versions to keep (default: 100) |
+| `-e CRON` | (Optional) Schedule periodic backups (crontab format) |
 
+---
 
+## ⭐ Support Me
+If you find this project useful, please consider giving it a ⭐ star on GitHub!
 
-| Environments / Volumes |                         Description                          |
-| :--------------------: | :----------------------------------------------------------: |
-| **-e RESTORE_VERSION="0"** | [Optional], use this if you want to restore to a specific backup version, default =0, you can see all versions available by using the command find instead of restore in the last command line |
+☕ **Buy me a coffee:** [![Ko-fi](https://download.lrgex.com/assets/images/coffee.png)](https://ko-fi.com/lrgex)
 
+---
 
-
----------------------
-
---------------------
-
---------------
-
-
-
-## Combining multiple commands 
-
-- With Backarosa you can combine multiple backup commands into one, meaning you can backup your containers on both Google drive and on local folder, here is an example : 
-
-  ```dockerfile
-  docker run -d \
-  -e KEEP_VERSIONS="2" \
-  -v <volume_name>:/source:ro \
-  -v <path/to/local_folder>:/backup \
-  -v /var/run/docker.sock:/var/run/docker.sock \
-  -e LOCAL_BACKUP="true" \
-  -e TZ="Asia/Riyadh" \
-  -e GDRIVE_DIR="/path/to/folder" \
-  -e GDRIVE_AUTHID='paste your DROPBOX_AUTHID' \
-  -e CRON="* * * * *" \
-  --restart always \
-  --name <insert_name> lrgex/backarosa backup
-  ```
-
-
-
-   
+## 📜 License
+This project is licensed under the MIT License. See [LICENSE](./LICENSE) for details.
