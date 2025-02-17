@@ -2,7 +2,7 @@
 
 # <div align="center">Backarosa</div>
 
-<p align="center">Automated Docker volume backup and restore to most common backends, developed by LRGEX Group, powered by Duplicati and it works on both x86 and ARM architechture.</p> 
+<p align="center">Automated Docker volume backup and restore to most common backends, developed by LRGEX Group, powered by Duplicati and it works on both x86 and ARM architecture.</p> 
 
 ## List of supported backends :  
 
@@ -40,7 +40,7 @@ This section is for **Backarosa backup** commands only, you can find more info a
 
 
 
-### Backup using Mega drive  :
+### Backup using Mega Drive  :
 
 To **backup** your container you need to run this command 
 
@@ -93,7 +93,7 @@ docker run -d \
 -v /var/run/docker.sock:/var/run/docker.sock \
 -e TZ="Asia/Riyadh" \
 -e GDRIVE_DIR="path/to/folder" \
--e GDRIVE_AUTHID='paste your DROPBOX_AUTHID' \
+-e GDRIVE_AUTHID='paste your GDRIVE_AUTHID' \
 -e CRON="* * * * *" \
 --restart always \
 --name <insert_name> lrgex/backarosa backup
@@ -134,12 +134,12 @@ docker run -d \
 | ------------------------------------------------ | ------------------------------------------------------------ |
 | **-e KEEP_VERSIONS**                             | [optional] it will increase/decrease the number of backups versions. default is 100 |
 | **-v <volume_name>:/source:ro**                  | This is related to your desired volume to be backed up e.g  Sonarr:/source:ro |
-| **-v /var/run/docker.sock:/var/run/docker.sock** | This is the Docker sock, we need that's to start and shutdown containers while backuping |
+| **-v /var/run/docker.sock:/var/run/docker.sock** | This is the Docker sock, we need that's to start and shutdown containers while backing up |
 | **-e TZ="Asia/Riyadh"**                          | You need to insert your timezone                             |
-| **-e MEGA_DIR="/path/to/folder"**                | This is the path for the directory inside your mega drive e.g /mybackups/docker_container_backup |
+| **-e MEGA_DIR="/path/to/folder"**                | This is the path for the directory inside your Mega Drive e.g /mybackups/docker_container_backup |
 | -e CRON="* * * * *"                              | [optional] periodic backup using crontab format              |
 | **-e DROPBOX_DIR="/path/to/folder"**             | The path for the directory inside your Dropbox drive         |
-| **-e GDRIVE_DIR="/path/to/folder"**              | #path for the directory inside your Google Drive drive       |
+| **-e GDRIVE_DIR="/path/to/folder"**              | #Path for the directory inside your Google Drive       |
 | **-e DROPBOX_AUTHID='paste_Token'**              | First you need to get your token from the link [check backup section], copy it and paste its value here |
 | **-e GDRIVE_AUTHID='paste_Token'**               | First you need to get your token from the link [check backup section], copy it and paste its value here |
 
@@ -154,7 +154,7 @@ docker run -d \
 
 ## How to use Backarosa restore command ? 
 
-this section is for Backarosa restore commands only 
+This section is for Backarosa restore commands only. 
 
 ### Restore using Mega Drive : 
 
@@ -239,7 +239,7 @@ lrgex/backarosa restore
 
 ## Combining multiple commands 
 
-- With Backarosa you can combine multiple backup commands into one, meaning you can backup your containers on both Google drive and on local folder, here is an example : 
+- With Backarosa you can combine multiple backup commands into one, meaning you can back up your containers on both Google drive and on local folder, here is an example : 
 
   ```dockerfile
   docker run -d \
