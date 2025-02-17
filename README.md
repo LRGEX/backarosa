@@ -4,6 +4,12 @@
 
 <p align="center">Automated Docker volume backup and restore to most common backends, developed by LRGEX Group, powered by Duplicati and it works on both x86 and ARM architecture.</p> 
 
+
+![GitHub License](https://img.shields.io/github/license/LRGEX/backarosa)
+![GitHub Stars](https://img.shields.io/github/stars/LRGEX/backarosa?style=social)
+![Docker Pulls](https://img.shields.io/docker/pulls/lrgex/backarosa)
+
+
 ## List of supported backends :  
 
 
