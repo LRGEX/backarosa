@@ -11,10 +11,14 @@
 
 
 
+## 🔥 Use Cases
+- **Host your own Docker backup system** with minimal effort.
+- **Automate backups to Google Drive, Dropbox, or Mega Drive**.
+- **Keep multiple versions of your backups** for added safety.
+- **Works on both servers and personal Raspberry Pi setups.**
 
+  
 ## List of supported backends :  
-
-
 
 1 - **Mega Drive** 
 
