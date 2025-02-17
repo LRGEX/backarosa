@@ -31,21 +31,6 @@
 and we will continue to add more! 
 
 
-## Stay Up-to-Date
-
-⭐ ${\normalsize{\textcolor{goldenrod}{\texttt{Star this project}}}}$
-
-Watch for releases and updates.
-
-<img src="https://download.lrgex.com/assets/images/givestar.gif" width="500" alt='github star'/>
-
-
-## Support Me
-
-Please ⭐ star this repository!
-
-If you found my work useful, consider buying me a [<img src="https://download.lrgex.com/assets/images/coffee.png" height="20" alt='Ko-fi'/>](https://ko-fi.com/lrgex).
-
 ## How to use Backarosa backup command ? 
 
 This section is for **Backarosa backup** commands only, you can find more info about restore function in the **Backarosa restore section**.
@@ -267,6 +252,22 @@ lrgex/backarosa restore
   --restart always \
   --name <insert_name> lrgex/backarosa backup
   ```
+
+
+## Stay Up-to-Date
+
+⭐ ${\normalsize{\textcolor{goldenrod}{\texttt{Star this project}}}}$
+
+Watch for releases and updates.
+
+<img src="https://download.lrgex.com/assets/images/givestar.gif" width="500" alt='github star'/>
+
+
+## Support Me
+
+Please ⭐ star this repository!
+
+If you found my work useful, consider buying me a [<img src="https://download.lrgex.com/assets/images/coffee.png" height="20" alt='Ko-fi'/>](https://ko-fi.com/lrgex).
 
 
 
