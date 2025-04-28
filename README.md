@@ -1,4 +1,4 @@
-<p align="center"><img src="http://cloud.lrgex.com/s/mCxTfnA2bikjYyZ/download/Dark%20Full%20Logo.png" alt= “” width="400" height="100"></p>
+<p align="center"><img src="[http://cloud.lrgex.com/s/mCxTfnA2bikjYyZ/download/Dark%20Full%20Logo.png](https://download.lrgex.com/Dark%20Full%20Logo.png)" alt= “” width="400" height="100"></p>
 
 # <div align="center">Backarosa</div>
 ![GitHub License](https://img.shields.io/github/license/LRGEX/backarosa)
