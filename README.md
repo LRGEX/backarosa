@@ -57,6 +57,21 @@ docker run -d \
 --name <insert_name> lrgex/backarosa backup
 
 ````
+example: 
+````dockerfile
+docker run -d \
+  -e KEEP_VERSIONS="2" \
+  -v nextcloud_data:/source:ro \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  -e TZ="Asia/Riyadh" \
+  -e MEGA_DIR="backups/nextcloud" \
+  -e MEGA_EMAIL="youremail@domain.com" \
+  -e MEGA_PASSWORD='YourStrongMegaPassword' \
+  -e CRON="0 * * * *" \
+  --restart always \
+  --name backarosa-nextcloud-backup lrgex/backarosa backup
+
+````
 
 ---------------------------------------------------------------------------------------------------------
 
