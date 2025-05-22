@@ -186,6 +186,19 @@ docker run --rm \
 lrgex/backarosa restore
 ```
 
+Example: 
+```dockerfile
+docker run --rm \
+  -v nextcloud_data:/source \
+  -e TZ="Asia/Riyadh" \
+  -e MEGA_DIR="/backups/nextcloud" \
+  -e MEGA_EMAIL="user@example.com" \
+  -e MEGA_PASSWORD="MyStrongMegaPassword123!" \
+  -e RESTORE_VERSION="0" \
+  lrgex/backarosa restore
+```
+
+
 ### Restore using Dropbox : 
 
 To restore using Dropbox, you need to run this command, please refer to Dropbox backup section to learn more on how to get your DROPBOX_AUTHID
