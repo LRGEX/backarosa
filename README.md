@@ -153,7 +153,8 @@ docker run -d \
 
 ## How to use Backarosa restore command ? 
 
-This section is for Backarosa restore commands only. 
+This section is for Backarosa restore commands only.
+To use Backarosa for restoration, first restore the backed-up Docker volume using Backarosa. Once the volume is successfully restored, you can then start your Docker Compose / run command to start the containers.
 
 ### Restore using Mega Drive : 
 
