@@ -37,6 +37,9 @@ and we will continue to add more!
 
 This section is for **Backarosa backup** commands only, you can find more info about restore function in the **Backarosa restore section**.
 
+Keep in mind that the way Backarosa Backup works is by automatically stopping the container, backing up its volume, and then restarting the container afterward.
+and you can also backup multiple volumes if you need. just add more -v .
+
 
 
 ### Backup using Mega Drive  :
